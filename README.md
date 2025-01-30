@@ -97,8 +97,7 @@ keepUp/
 │       └── components/ # React Components and CSS Files
 │
 └── keepUpAPI/          # Backend Express
-    ├── routes/         # API Routes
-    └── config/         # Configuration
+
 ```
 
 ## Contribution
@@ -107,7 +106,7 @@ Contributions are welcome! Feel free to:
 - Suggest new features
 - Contribute to the code
 ## Licence
-Ce projet est sous licence MIT - voir le fichier LICENSE pour plus de détails.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Auteur
-KeepUp - 2025
+Lila JACQUET-CRETIDES- 2025
