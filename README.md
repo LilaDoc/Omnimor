@@ -1,6 +1,5 @@
 # KeepUp - Your Personal Web Article Manager
 
-![KeepUp Logo|100](/keepUpApp/public/assets/logo.png)
 
 ## Overview
 KeepUp is a self-hosted web article management solution born from the sunset of Omnivore. It aims to provide a seamless experience for saving, and reading web articles.
