@@ -1,6 +1,6 @@
 # KeepUp - Your Personal Web Article Manager
 
-![KeepUp Logo](path/to/logo.png)
+![KeepUp Logo](/keepUpApp/public/assets/logo.png)
 
 ## Overview
 KeepUp is a self-hosted web article management solution born from the sunset of Omnivore. It aims to provide a seamless experience for saving, and reading web articles.
@@ -108,5 +108,5 @@ Contributions are welcome! Feel free to:
 ## Licence
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Auteur
+## Author
 Lila JACQUET-CRETIDES- 2025
