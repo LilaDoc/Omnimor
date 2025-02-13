@@ -10,7 +10,7 @@ function Header(props) {
     }
     return (
         <div className={styles.header}>
-            <h1>KeepUp</h1>
+            <h1>OmniMor</h1>
             <div className={styles.searchContainer}>
                 {showSearchBar && <SearchBar/>}
                 <SearchButton handleClick={handleClick} />

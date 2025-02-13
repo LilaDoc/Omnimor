@@ -1,18 +1,12 @@
-# KeepUp - Your Personal Web Article Manager
+# Omnimor - Your Personal Web Article Manager
 
 
 ## Overview
-KeepUp is a self-hosted web article management solution born from the sunset of Omnivore. It aims to provide a seamless experience for saving, and reading web articles.
+Omnimor is a self-hosted web article management solution born from the sunset of Omnivore. It aims to provide a seamless experience for saving, and reading web articles.
 
-## Screenshots
 
-Here is a screenshot of the application:
-First view:
-![Homepage](./screenshots/homepage.png)
-Reader view:
 ![Reader View](./screenshots/reader.png)
-Add view:
-![Add View](./screenshots/add.png)
+
 
 
 
@@ -58,7 +52,7 @@ link TEXT
 
 ### Configuration du Backend
 ### Backend Setup
-1. Navigate to the `keepUpAPI` directory
+1. Navigate to the `omnimorapi` directory
 2. Create a `.env` file with your database credentials:
 ```
 DB_USER=votre_utilisateur
@@ -87,15 +81,15 @@ npm start
 
 ## Project Structure
 ```tree
-keepUp/
+omnimor/
 │
-├── keepUpApp/           # Frontend React
+├── omnimorapp/           # Frontend React
 │   ├── public/         
 │   │   └── assets/     # Assets
 │   └── src/
 │       └── components/ # React Components and CSS Files
 │
-└── keepUpAPI/          # Backend Express
+└── omnimorapi/          # Backend Express
 
 ```
 
