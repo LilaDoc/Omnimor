@@ -53,13 +53,13 @@ help:
 
 # Commande pour lancer le serveur et l'application avec logs
 run:
-	cd $(API_DIR) && nodemon index.js
+	cd $(API_DIR) && node index.js
 
 	cd $(APP_DIR) && npm run dev 
 
 # Commande pour lancer le serveur
 run-server:
-	cd $(API_DIR) && nodemon index.js
+	cd $(API_DIR) && node index.js
 
 # Commande pour lancer l'application
 run-app:
