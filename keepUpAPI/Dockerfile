@@ -3,5 +3,5 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-EXPOSE 4000
+EXPOSE ${API_PORT}
 CMD ["node", "index.js"]    

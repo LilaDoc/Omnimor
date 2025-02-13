@@ -1,7 +1,6 @@
-version: '3'
 services:
   db:
-    build: ./db
+    image: postgres:16
     ports:
       - "5432:5432"
     volumes:
@@ -9,7 +8,15 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mysecretpassword
-      POSTGRES_DB: keepUp
+      POSTGRES_DB: postgres
+      POSTGRES_PORT: 5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+      
   keepupapi:
     build: ./keepUpAPI
     ports:
@@ -17,16 +24,20 @@ services:
     environment:
       DB_USER: postgres
       DB_PASSWORD: mysecretpassword
-      DB_NAME: keepUp
+      DB_NAME: postgres
       DB_HOST: db
+      API_PORT: 4000
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+
   keepupapp:
     build: ./keepUpApp
     ports:
       - "3000:3000"
+    environment:
+      APP_PORT: 3000
     depends_on:
-      - db
       - keepupapi
 
 volumes:

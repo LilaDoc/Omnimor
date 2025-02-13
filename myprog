@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -z "${THIS_IS_IT}" ]; then
+    echo "I didnt found the envar please read documentation"
+else
+    echo "I found the secret:" $THIS_IS_IT
+fi

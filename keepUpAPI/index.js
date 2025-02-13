@@ -16,9 +16,19 @@ const db = new pg.Client({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  port: parseInt(process.env.DB_PORT, 10), // Convert string to number
 });
+
 db.connect();
+async function initDB() {
+  try {
+    await db.query("CREATE TABLE IF NOT EXISTS articles (id SERIAL PRIMARY KEY, title TEXT, link TEXT)");
+    console.log("Database initialized");
+  } catch (error) {
+    console.error('Error:', error);
+  }
+} 
+initDB();
 // async function urlToArticle(url){
 //   const article = await parseArticle(url);
 //   const articleData = generateArticleData(article);
@@ -31,7 +41,7 @@ async function parseArticle(articleURL) {
     const doc = dom.window.document;
     const reader = new Readability(doc);
     const article = reader.parse();
-    console.log(article);
+    // console.log(article);
     return article;
   } catch (error) {
     console.error('Error:', error);
@@ -66,7 +76,7 @@ app.get("/article", async (req, res) => {
   const id = req.query.id;
   try {
     const article = await db.query("SELECT link FROM articles WHERE id = $1", [id]);
-    console.log(article.rows[0]);
+    // console.log(article.rows[0]);
     res.redirect("/url?url=" + article.rows[0].link);
 
   } catch (error) {
@@ -119,9 +129,9 @@ app.post("/add", async (req, res) => {
 app.delete("/delete", async (req, res) => {
   try { 
     const id = req.query.id;
-    console.log("Received delete request for ID:", id); // Debug log
+    // console.log("Received delete request for ID:", id); // Debug log
     const result = await db.query("DELETE FROM articles WHERE id = $1", [id]);
-    console.log("Delete result:", result); // Debug log
+    // console.log("Delete result:", result); // Debug log
     res.json({ message: "Article deleted" });
   } catch (error) {
     console.error('Error:', error);
@@ -130,7 +140,7 @@ app.delete("/delete", async (req, res) => {
 });
 
 
-app.listen(4000, () => {
-  console.log("Server is running on port 4000");
+app.listen(process.env.API_PORT, () => {
+  console.log(`Server is running on port ${process.env.API_PORT}`);
 });
 
