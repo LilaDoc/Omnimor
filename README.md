@@ -34,21 +34,81 @@ Omnimor is a self-hosted web article management solution born from the sunset of
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- PostgreSQL (v12 or higher)
-- npm or yarn
+- Docker and Docker Compose
 
-### Database Setup
-1. Create a new PostgreSQL database
-2. Set up the articles table:
-```sql
-CREATE TABLE articles (
-id SERIAL PRIMARY KEY,
-title VARCHAR(255),
-link TEXT
-);
+### Installation Options
+
+#### Option 1: Docker (Recommended)
+1. Create a `docker-compose.yaml` file with the following content:
+```yaml
+services:
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    volumes:
+      - omnimor_db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: postgres
+      POSTGRES_PORT: 5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+      
+  omnimorapi:
+    image: omnimorapi:latest
+    ports:
+      - "4000:4000"
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: mysecretpassword
+      DB_NAME: postgres
+      DB_HOST: db
+      API_PORT: 4000
+    depends_on:
+      db:
+        condition: service_healthy
+
+  omnimorapp:
+    image: omnimorapp:latest
+    ports:
+      - "3000:3000"
+    environment:
+      APP_PORT: 3000
+    depends_on:
+      - omnimorapi
+
+volumes:
+  omnimor_db_data: {}
 ```
 
+2. Run the application:
+```bash
+docker-compose up -d
+```
+
+The application will be available at:
+- Frontend: http://localhost:3000
+- API: http://localhost:4000
+- Database: localhost:5432
+
+#### Option 2: Manual Setup
+1. Navigate to the `omnimorapi` directory
+2. Create a `.env` file with your database credentials:
+```
+DB_USER=your_username
+DB_HOST=localhost
+DB_NAME=your_database_name
+DB_PASSWORD=your_password
+DB_PORT=5432
+```
+
+Note: The database table will be created automatically when the API starts. If you're using Docker, the environment variables are already configured in the docker-compose.yaml file.
 
 ### Configuration du Backend
 ### Backend Setup
